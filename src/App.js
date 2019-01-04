@@ -12,7 +12,7 @@ const App = () => {
     <div className="root">
       <CssBaseline />
       <Header />
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route exact path="/" component={MainPage} />
           <Route path="/:id" component={EditLayoutPage} />
