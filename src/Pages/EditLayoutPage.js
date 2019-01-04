@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import LayoutX from '../components/LayoutX';
 import {Link} from 'react-router-dom';
 
-
 class EditLayoutPage extends Component {
 
     constructor(props) {
