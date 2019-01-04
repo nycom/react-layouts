@@ -11,18 +11,18 @@ import FaceIcon from '@material-ui/icons/Face';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const mapStateToProps = (state, ownProps) => {
-
     // saved in redux only the model data (taxt) all UI data stayed here for responsiveness
     return {
-        layout: state[ownProps.layoutName][ownProps.recId].map((item, i) => {
+        layout: state[ownProps.layoutName].containers[ownProps.recId].map((item, i) => {
+            console.log(ownProps.cols);
             return {
                 text: item.text,
                 i: i.toString(),
-                x: i,
+                x: i % 4,
                 y: 0,
                 w: 1,
                 h: 2,
-                static: true
+                static: true,
             };
         })
     };
@@ -32,12 +32,11 @@ class Receptor extends React.Component {
     static defaultProps = {
         className: "layout",
         onLayoutChange: function () { },
-        cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
+        cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 4 },
         rowHeight: 20
     };
 
     createElement(el) {
-
         return (
             <div className="element" key={el.i} data-grid={el}>
                 <Avatar><FaceIcon color="primary"/></Avatar>
@@ -57,6 +56,7 @@ class Receptor extends React.Component {
 
     // We're using the cols coming back from this to calculate where to add new items.
     onBreakpointChange = (breakpoint, cols) => {
+        console.log(cols);
         this.setState({
             breakpoint: breakpoint,
             cols: cols

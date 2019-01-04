@@ -1,56 +1,47 @@
-// import React from 'react';
-// import Grid from '@material-ui/core/Grid';
-// import Receptor from './Receptor';
+import React from 'react';
+import Grid from '@material-ui/core/Grid';
+import Receptor from './Receptor';
+import { connect } from "react-redux";
 
-// const lay = [2,1,1];
+const mapStateToProps = (state, ownProps) => {
+    // layout structure in redux for convinience (structure & containers in one place) 
+    return {
+        structure: state[ownProps.layoutName] ? state[ownProps.layoutName].structure : [],
+    };
+};
 
-// let getCols = (colsNum,layoutName,startingIndex) => {
-//     let cols = [];
-//     for (let i = 0; i < colsNum; i++) {
-//         cols.push(<Grid  key={startingIndex+i} item xs={12/colsNum}>
-//                     <Receptor layoutName={layoutName} recId={startingIndex+i}/>
-//                 </Grid>)
-//     }
-//     return cols;
-// }
+let uniqueIdProvider = 0;
 
-// const LayoutX = (props) => {
-//     return (
-//         <Grid item className="layout-container">
-//             {
-//                 lay.map((item,i) => {
-//                   return (
-//                     <Grid key={i} container direction="row" spacing={24}>
-//                     {getCols(item,props.layoutName,i*item)}
-//                 </Grid>
-//                   )  
-//                 })
-//             }
-//             {/* <Grid container direction="row" spacing={24}>
-//                 <Grid item xs={6}>
-//                     <Receptor layoutName="layout" recId={0} />
-//                 </Grid>
+const getCols = (colsNum, layoutName) => {
+    let cols = [];
+    for (let i = 0; i < colsNum; i++) {
+        cols.push(<Grid key={uniqueIdProvider} item xs={12 / colsNum}>
+            <Receptor layoutName={layoutName} recId={uniqueIdProvider} />
+        </Grid>);
+        uniqueIdProvider++;
+    }
+    return cols;
+}
 
-//                 <Grid item xs={6}>
-//                     <Receptor layoutName="layout" recId={1}/>
-//                 </Grid>
-//             </Grid>
-//             <Grid container direction="row" spacing={24}>
-//                 <Grid item xs={6}>
-//                     <Receptor layoutName="layout" recId={2}/>
-//                 </Grid>
+const LayoutX = (props) => {
+    uniqueIdProvider = 0;
+    return (
 
-//                 <Grid item xs={6}>
-//                     <Receptor layoutName="layout" recId={3}/>
-//                 </Grid>
-//             </Grid>
-//             <Grid container direction="row" spacing={24}>
-//                 <Grid item xs={12}>
-//                     <Receptor layoutName="layout" recId={4}/>
-//                 </Grid>
-//             </Grid> */}
-//         </Grid>
-//     );
-// }
+        props.structure.length > 0 ?
+            <Grid item className="layout-container">
 
-// export default LayoutX;
+                {
+                    props.structure.map((item, i) => {
+                        return (
+                            <Grid key={i} container direction="row" spacing={24}>
+                                {getCols(item, props.layoutName)}
+                            </Grid>
+                        )
+                    })
+                }
+
+            </Grid>
+            : <h1>Layout Not Found!!!</h1>);
+}
+
+export default connect(mapStateToProps)(LayoutX);

@@ -12,7 +12,8 @@ class DraggableList extends Component {
                 { text: "No 1" },
                 { text: "No 2" },
                 { text: "No 3" },
-                { text: "No 4" }
+                { text: "No 4" },
+                { text: "No 5" }
             ],
         }
 

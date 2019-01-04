@@ -23,6 +23,10 @@ a, a:visited {
   width: 200px;
 }
 
+.edit-layout-container .react-grid-layout {
+  min-height: 160px;
+}
+
 .react-grid-layout {
   position: relative;
   transition: height 200ms ease;
@@ -89,6 +93,8 @@ a, a:visited {
   padding: 10px;
   background-color: mediumorchid;
   border-radius: 5px;
+  margin-top: 20px;
+  font-weight: bold;
 }
 
 .draggable-item {
