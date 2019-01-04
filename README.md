@@ -2,12 +2,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## React Layous App
 
+Dinamic Layouts using react-grid-layout and redux state management
+
 (download and run npm i)
 
-
-**Notes:**
-
-Redux only contains model data (selected design)
-
-currently layouts are static (WIP: for dinamic layouts - See LayoutX commented component)
 
